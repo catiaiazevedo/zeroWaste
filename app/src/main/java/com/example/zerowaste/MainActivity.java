@@ -2,6 +2,7 @@ package com.example.zerowaste;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,5 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content1_frame, new TrayFragment()).commit();
     }
 }

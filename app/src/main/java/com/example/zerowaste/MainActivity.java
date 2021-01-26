@@ -46,6 +46,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content1_frame, new TrayFragment()).commit();
+        transaction.replace(R.id.content1_frame, new RestaurantListFragment()).commit();
     }
 }

@@ -51,6 +51,6 @@ public class DashBoard extends AppCompatActivity {
         });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, new RestaurantListFragment()).commit();
+        transaction.replace(R.id.content_frame, new TrayFragment()).commit();
     }
 }

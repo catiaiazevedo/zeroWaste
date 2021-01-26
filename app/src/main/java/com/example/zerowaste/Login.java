@@ -13,22 +13,35 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.SSLEngineResult;
 
 public class Login extends AppCompatActivity{
     private static final int RC_SIGN_IN = 1;
     private static final String TAG = "Login";
     SignInButton signInButton;
     private GoogleSignInClient mGoogleSignInClient;
-    private GoogleSignInAccount account;
+    private CollectionReference collRef = FirebaseFirestore.getInstance().collection("users");
+    User user;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     // Set the dimensions of the sign-in button.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        user = new User();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,7 +51,7 @@ public class Login extends AppCompatActivity{
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -80,7 +93,8 @@ public class Login extends AppCompatActivity{
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            //String email = account.getEmail();
+
+
 
             // Signed in successfully, show authenticated UI.
             updateUI(account);
@@ -96,12 +110,31 @@ public class Login extends AppCompatActivity{
 
         if(account != null){
             Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
+            user.setEmail(account.getEmail());
+            user.setFname(account.getGivenName());
+            user.setLname(account.getFamilyName());
+            writeNewPost(user.getFname(),user.getLname(),user.getEmail(), user.getId());
             startActivity(new Intent(this,MainActivity.class));
 
         }else {
             Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    private void writeNewPost(String fname,String lname, String email, int id) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        Map<String, Object> usermap = new HashMap<>();
+        usermap.put("id",id);
+        usermap.put("fname",fname);
+        usermap.put("lname",lname);
+        usermap.put("email",email);
+
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("users/" + id ,usermap);
+        collRef.add(childUpdates);
     }
 
 

@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeroWaste">
+        <activity android:name=".RestaurantPage"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBTenwDqWmsKRQ-pEpA_B8s1JZZB5gPOP4" />
 
-        <activity android:name=".About"></activity>
+        <activity android:name=".About" />
         <activity android:name=".DashBoard" />
         <activity android:name=".MainActivity">
             <intent-filter>

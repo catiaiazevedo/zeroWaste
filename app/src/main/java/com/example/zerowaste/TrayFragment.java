@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TrayFragment#newInstance} factory method to

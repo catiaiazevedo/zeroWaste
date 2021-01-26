@@ -54,5 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Encomendar" />
+        android:text="Encomendar"
+        app:backgroundTint="@android:color/holo_green_dark" />
 </LinearLayout>

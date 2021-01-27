@@ -10,6 +10,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -52,7 +53,8 @@ public class Qrcode extends AppCompatActivity {
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
                     return;
                 }

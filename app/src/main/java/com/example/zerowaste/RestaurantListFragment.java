@@ -43,7 +43,7 @@ public class RestaurantListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     //private String mParam1;
     //private String mParam2;
-    private static final Integer MAX_REST = 2;
+    private static final Integer MAX_REST = 3;
     private static final String TAG = "RESTAURANT";
     private RestaurantListViewAdapter restaurantListAdapter;
     private ListView rListView;

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -50,9 +51,6 @@ public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tray_fragment_final);
-        mapFragment.getMapAsync(this);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -86,31 +84,43 @@ public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerCl
         preco = getIntent().getStringExtra(PRECO);
         tel = getIntent().getStringExtra(TEL);
 
+
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.content_frame, TrayFragmentFinal.newInstance(magic_box,preco,morada,tel)).commit();
+       // transaction.replace(R.id.content_frame, new TrayFragmentFinal()).commit();
+        transaction.replace(R.id.content_frame, TrayFragmentFinal.newInstance(magic_box,preco,morada,tel)).commit();
+       TrayFragmentFinal f = new TrayFragmentFinal();
+       /* SupportMapFragment mapFragment =
+                (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.tray_fragment_final);
+        mapFragment.getMapAsync(this::onMapReady);*/
+
+
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         // Add some markers to the map, and add a data object to each marker.
         markerPerth = map.addMarker(new MarkerOptions()
-                .position(PERTH)
-                .title("Perth"));
+                .position(new LatLng(40.6269701,-8.6464341))
+                .title("Auchan"));
         markerPerth.setTag(0);
 
+        /*
         markerSydney = map.addMarker(new MarkerOptions()
-                .position(SYDNEY)
-                .title("Sydney"));
+                .position(new LatLng(40.6369033,-8.6522186))
+                .title("Saladas+"));
         markerSydney.setTag(0);
-
-        markerBrisbane = map.addMarker(new MarkerOptions()
-                .position(BRISBANE)
-                .title("Brisbane"));
-        markerBrisbane.setTag(0);
+        */
+//        markerBrisbane = map.addMarker(new MarkerOptions()
+//                .position(BRISBANE)
+//                .title("Brisbane"));
+//        markerBrisbane.setTag(0);
 
         // Set a listener for marker click.
         map.setOnMarkerClickListener(this);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.6269701, -8.6464341), 14.5f));
     }
+
 
     /** Called when the user clicks a marker. */
     @Override

@@ -1,6 +1,7 @@
 package com.example.zerowaste;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -21,9 +22,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import org.w3c.dom.Text;
+
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +56,7 @@ public class TrayFragmentFinal extends Fragment {
     private TextView vMagic_box;
     private TextView vPreco;
     private Button chamada;
+    private SupportMapFragment mapFragment;
 
 
     public TrayFragmentFinal() {
@@ -83,6 +89,10 @@ public class TrayFragmentFinal extends Fragment {
         vMorada    = (TextView) rootView.findViewById(R.id.tray_address_final);
         vPreco     = (TextView) rootView.findViewById(R.id.tray_price_final_final);
         chamada    = (Button) rootView.findViewById(R.id.tray_call);
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.fragment);
+        mapFragment.getMapAsync((OnMapReadyCallback) getActivity());
+
 
         if (getArguments() != null) {
             magic_box = getArguments().getString(MAGIC_BOX);
@@ -120,6 +130,8 @@ public class TrayFragmentFinal extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
+
+
 
 
 }

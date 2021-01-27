@@ -77,12 +77,6 @@
                 android:layout_marginRight="15dp"
                 android:background="@android:color/darker_gray" />
 
-            <fragment
-                android:id="@+id/fragment"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="225dp" />
-
             <Button
                 android:id="@+id/payment_button"
                 android:layout_width="match_parent"
@@ -94,6 +88,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:backgroundTint="@android:color/holo_green_dark" />
+
         </LinearLayout>
     </ScrollView>
 

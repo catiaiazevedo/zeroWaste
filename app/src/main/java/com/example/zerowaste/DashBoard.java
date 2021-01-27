@@ -2,6 +2,8 @@ package com.example.zerowaste;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -22,7 +24,16 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class DashBoard extends AppCompatActivity implements OnMapReadyCallback {
+public class DashBoard extends AppCompatActivity  {
+    private static final String MORADA = "morada";
+    private static final String MAGIC_BOX = "magic_box";
+    private static final String PRECO = "preco";
+    private static final String TEL = "tel";
+
+    String morada;
+    String magic_box;
+    String preco;
+    String tel;
     GoogleMap gMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +44,9 @@ public class DashBoard extends AppCompatActivity implements OnMapReadyCallback {
 
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
         //id.fragment
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
+        /*SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
-        supportMapFragment.getMapAsync(this);
+        supportMapFragment.getMapAsync(this);*/
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -60,12 +71,16 @@ public class DashBoard extends AppCompatActivity implements OnMapReadyCallback {
                 return false;
             }
         });
+        magic_box = getIntent().getStringExtra(MAGIC_BOX);
+        morada = getIntent().getStringExtra(MORADA);
+        preco = getIntent().getStringExtra(PRECO);
+        tel = getIntent().getStringExtra(TEL);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, new TrayFragment()).commit();
+        transaction.add(R.id.content_frame, TrayFragmentFinal.newInstance(magic_box,preco,morada,tel)).commit();
     }
 
-    @Override
+  /*  @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -86,5 +101,5 @@ public class DashBoard extends AppCompatActivity implements OnMapReadyCallback {
                 gMap.addMarker(markerOptions);
             }
         });
-    }
+    }*/
 }

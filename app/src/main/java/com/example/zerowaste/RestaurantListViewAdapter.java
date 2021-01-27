@@ -33,6 +33,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
     private static final String MAGIC_BOX = "magic_box";
     private static final String PRECO = "preco";
     private static final String IMAGEM = "imagem";
+    private static final String TEL = "tel";
     private static final String TAG = "ADAPTER" ;
     private Context context;
 
@@ -82,6 +83,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
                 bundle.putString(MAGIC_BOX,r.getMagic_box());
                 bundle.putString(PRECO,r.getPreco());
                 bundle.putString(IMAGEM,r.getImagem());
+                bundle.putString(TEL,r.getTelefone());
                 RestaurantPageFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.content1_frame,RestaurantPageFragment).
                         addToBackStack(null).commit();

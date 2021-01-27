@@ -14,13 +14,12 @@ public class Restaurant {
     private String horario;
     private String morada;
     private String imagem;
+    private String telefone;
     private ArrayList<Restaurant> restaurants;
-    /*
-    private CollectionReference collRef = FirebaseFirestore.getInstance().collection("restaurantes");
-    private static final String TAG = "RestaurantClass";*/
+
     public Restaurant(){}
 
-    public Restaurant(String nome, String preco, GeoPoint localizacao, List<String> estado, String magic_box, String horario, String morada, String imagem) {
+    public Restaurant(String nome, String preco, GeoPoint localizacao, List<String> estado, String magic_box, String horario, String morada, String imagem, String telefone) {
         this.nome = nome;
         this.preco = preco;
         this.localizacao = localizacao;
@@ -29,6 +28,7 @@ public class Restaurant {
         this.horario = horario;
         this.morada = morada;
         this.imagem = imagem;
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -57,12 +57,10 @@ public class Restaurant {
     public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }
-
-     public String toString(){
+    public String getMorada() { return morada; }
+    public String getImagem() { return imagem; }
+    public String getTelefone() { return telefone; }
+    public String toString(){
         return "Nome:" + nome + "Morada: " + morada;
     }
-
-    public String getMorada() { return morada; }
-
-    public String getImagem() { return imagem; }
 }

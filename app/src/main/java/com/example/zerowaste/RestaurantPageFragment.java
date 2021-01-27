@@ -2,12 +2,14 @@ package com.example.zerowaste;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RestaurantPageFragment#newInstance} factory method to
+ * Use the {@link RestaurantPageFragment} factory method to
  * create an instance of this fragment.
  */
 public class RestaurantPageFragment extends Fragment {
@@ -32,6 +34,7 @@ public class RestaurantPageFragment extends Fragment {
     private static final String MAGIC_BOX = "magic_box";
     private static final String IMAGEM = "imagem";
     private static final String PRECO = "preco";
+    private static final String TEL = "tel";
     private static final String TAG = "RESTAURANTE FRAGMENT";
 
 
@@ -43,6 +46,7 @@ public class RestaurantPageFragment extends Fragment {
     private String magic_box;
     private String imagem;
     private String preco;
+    private String tel;
 
     private TextView vnome;
     private TextView vhorario;
@@ -50,6 +54,7 @@ public class RestaurantPageFragment extends Fragment {
     private TextView vmagic_box;
     private TextView vpreco;
     private ImageView vimagem;
+    private Button orderb;
 
 
     public RestaurantPageFragment() {
@@ -77,6 +82,7 @@ public class RestaurantPageFragment extends Fragment {
             preco = getArguments().getString(PRECO);
             magic_box = getArguments().getString(MAGIC_BOX);
             imagem = getArguments().getString(IMAGEM);
+            tel    = getArguments().getString(TEL);
         }
 
         vnome = (TextView) rootView.findViewById(R.id.page_name);
@@ -85,6 +91,7 @@ public class RestaurantPageFragment extends Fragment {
         vmagic_box = (TextView) rootView.findViewById(R.id.page_magic_box);
         vpreco = (TextView) rootView.findViewById(R.id.page_preco);
         vimagem = (ImageView) rootView.findViewById(R.id.page_image);
+        orderb = (Button) rootView.findViewById(R.id.order);
 
         Picasso.with(getContext()).load(imagem).into(vimagem);
         vnome.setText(nome);
@@ -92,6 +99,26 @@ public class RestaurantPageFragment extends Fragment {
         vhorario.setText("Horário:"+horario);
         vmagic_box.setText("Categoria: "+magic_box);
         vpreco.setText("Preço: " +preco);
+
+
+        orderb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment TrayFragment = new TrayFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(MAGIC_BOX, magic_box);
+                bundle.putString(PRECO,preco);
+                bundle.putString(MORADA,morada);
+                bundle.putString(TEL,tel);
+                TrayFragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content1_frame,TrayFragment).
+                        commit();
+
+
+            }
+        });
+
 
 
         // Inflate the layout for this fragment

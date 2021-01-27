@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tray_fragment"
+    android:id="@+id/tray_fragment_final"
     android:layout_width="match_parent"
     android:layout_height="680dp"
     android:orientation="vertical"
@@ -25,14 +25,14 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tray_box"
+                    android:id="@+id/tray_box_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/tray_total"
+                    android:id="@+id/tray_total_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -40,7 +40,7 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tray_price"
+                    android:id="@+id/tray_price_final_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tray_address"
+                    android:id="@+id/tray_address_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -82,13 +82,13 @@
                 android:layout_height="225dp" />
 
             <Button
-                android:id="@+id/payment_button"
+                android:id="@+id/tray_call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:isScrollContainer="true"
                 android:keepScreenOn="true"
-                android:text="Adicionar modo de Pagamento"
+                android:text="Contactar Restaurante"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:backgroundTint="@android:color/holo_blue_dark" />

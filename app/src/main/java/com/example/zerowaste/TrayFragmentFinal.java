@@ -1,10 +1,15 @@
 package com.example.zerowaste;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -22,10 +27,10 @@ import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TrayFragment}  method to
+ * Use the {@link TrayFragmentFinal}  method to
  * create an instance of this fragment.
  */
-public class TrayFragment extends Fragment {
+public class TrayFragmentFinal extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +39,7 @@ public class TrayFragment extends Fragment {
     private static final String PRECO = "preco";
     private static final String TEL = "tel";
     private static final String TAG = "TRAY" ;
+    private static final int REQUEST_PHONE_CALL = 1;
 
     // TODO: Rename and change types of parameters
     private String morada;
@@ -44,13 +50,22 @@ public class TrayFragment extends Fragment {
     private TextView vMorada;
     private TextView vMagic_box;
     private TextView vPreco;
-    private Button pagamento;
+    private Button chamada;
 
 
-    public TrayFragment() {
+    public TrayFragmentFinal() {
         // Required empty public constructor
     }
-
+    public static TrayFragmentFinal newInstance(String magic_box, String preco, String morada, String tel){
+        TrayFragmentFinal trayFragmentFinal = new TrayFragmentFinal();
+        Bundle args = new Bundle();
+        args.putString(MAGIC_BOX, magic_box);
+        args.putString(PRECO, preco);
+        args.putString(MORADA,morada);
+        args.putString(TEL,tel);
+        trayFragmentFinal.setArguments(args);
+        return trayFragmentFinal;
+    }
 
 
     @Override
@@ -62,12 +77,12 @@ public class TrayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_tray, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tray_complete, container, false);
 
-        vMagic_box = (TextView) rootView.findViewById(R.id.tray_box);
-        vMorada    = (TextView) rootView.findViewById(R.id.tray_address);
-        vPreco     = (TextView) rootView.findViewById(R.id.tray_price);
-        pagamento  = (Button) rootView.findViewById(R.id.payment_button);
+        vMagic_box = (TextView) rootView.findViewById(R.id.tray_box_final);
+        vMorada    = (TextView) rootView.findViewById(R.id.tray_address_final);
+        vPreco     = (TextView) rootView.findViewById(R.id.tray_price_final_final);
+        chamada    = (Button) rootView.findViewById(R.id.tray_call);
 
         if (getArguments() != null) {
             magic_box = getArguments().getString(MAGIC_BOX);
@@ -83,35 +98,27 @@ public class TrayFragment extends Fragment {
         vMorada.setText(morada);
         vPreco.setText(preco);
 
-        pagamento.setOnClickListener(new View.OnClickListener() {
+        chamada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Fragment TrayFragmentFinal = new TrayFragmentFinal();
-                Bundle bundle = new Bundle();
-                bundle.putString(MAGIC_BOX, magic_box);
-                bundle.putString(PRECO,preco);
-                bundle.putString(MORADA,morada);
-                bundle.putString(TEL,tel);
-                updateDetail();
-                TrayFragmentFinal.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content1_frame,TrayFragmentFinal).
-                        addToBackStack(null).commit();
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+ tel));
 
+
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+                }
+                else
+                {
+                    getActivity().startActivity(callIntent);
+                }
 
             }
         });
 
         // Inflate the layout for this fragment
         return rootView;
-    }
-    public void updateDetail() {
-        Intent intent = new Intent(getActivity(), DashBoard.class);
-        intent.putExtra(MORADA,morada);
-        intent.putExtra(MAGIC_BOX,magic_box);
-        intent.putExtra(TEL,tel);
-        intent.putExtra(PRECO,preco);
-        startActivity(intent);
     }
 
 

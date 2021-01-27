@@ -58,12 +58,12 @@
                 android:text="Preço" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Encomendar"
-                app:backgroundTint="@android:color/holo_green_dark" />
+                app:backgroundTint="@android:color/holo_blue_dark" />
         </LinearLayout>
     </ScrollView>
 

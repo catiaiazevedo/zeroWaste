@@ -2,29 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rest_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RestaurantListFragment" >
+    tools:context=".RestaurantListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:orientation="horizontal"
         android:padding="5dp">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@android:drawable/ic_search_category_default"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
@@ -36,10 +26,23 @@
             android:hint="Procurar Estabelecimento"
             android:inputType="textPersonName"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@android:drawable/ic_search_category_default"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/restaurant_list"
         android:layout_width="match_parent"
-        android:layout_height="650dp" />
+        android:layout_height="650dp"
+        android:clickable="true"
+        android:focusable="true" />
 </LinearLayout>

@@ -67,31 +67,5 @@ public class TrayFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_tray, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-        ListView listView = (ListView) getActivity().findViewById(R.id.tray_list);
-        listView.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return 5;
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                return LayoutInflater.from(getActivity()).inflate(R.layout.list_item_tray, null);
-            }
-        });
-    }
 }

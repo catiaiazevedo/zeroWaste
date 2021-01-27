@@ -4,9 +4,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,48 +26,75 @@ public class RestaurantPageFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String NOME = "nome";
+    private static final String HORARIO = "horario";
+    private static final String MORADA = "morada";
+    private static final String MAGIC_BOX = "magic_box";
+    private static final String IMAGEM = "imagem";
+    private static final String PRECO = "preco";
+    private static final String TAG = "RESTAURANTE FRAGMENT";
+
+
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String nome;
+    private String horario;
+    private String morada;
+    private String magic_box;
+    private String imagem;
+    private String preco;
+
+    private TextView vnome;
+    private TextView vhorario;
+    private TextView vmorada;
+    private TextView vmagic_box;
+    private TextView vpreco;
+    private ImageView vimagem;
+
 
     public RestaurantPageFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RestaurantPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RestaurantPageFragment newInstance(String param1, String param2) {
-        RestaurantPageFragment fragment = new RestaurantPageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_restaurant_page, container, false);
+
+        Log.d(TAG, "ARGUMENTOS"+ getArguments());
+        if (getArguments() != null) {
+            nome = getArguments().getString(NOME);
+            horario = getArguments().getString(HORARIO);
+            morada = getArguments().getString(MORADA);
+            preco = getArguments().getString(PRECO);
+            magic_box = getArguments().getString(MAGIC_BOX);
+            imagem = getArguments().getString(IMAGEM);
+        }
+
+        vnome = (TextView) rootView.findViewById(R.id.page_name);
+        vmorada = (TextView) rootView.findViewById(R.id.page_address);
+        vhorario = (TextView) rootView.findViewById(R.id.page_schedule);
+        vmagic_box = (TextView) rootView.findViewById(R.id.page_magic_box);
+        vpreco = (TextView) rootView.findViewById(R.id.page_preco);
+        vimagem = (ImageView) rootView.findViewById(R.id.page_image);
+
+        Picasso.with(getContext()).load(imagem).into(vimagem);
+        vnome.setText(nome);
+        vmorada.setText(morada);
+        vhorario.setText("Horário:"+horario);
+        vmagic_box.setText("Categoria: "+magic_box);
+        vpreco.setText("Preço: " +preco);
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_restaurant_page, container, false);
+       return rootView;
     }
 }

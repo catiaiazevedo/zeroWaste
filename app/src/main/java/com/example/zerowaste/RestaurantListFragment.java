@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +52,12 @@ public class RestaurantListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
@@ -60,6 +67,14 @@ public class RestaurantListFragment extends Fragment {
         rListView = (ListView) rootView.findViewById(R.id.restaurant_list);
         rListView.setAdapter(restaurantListAdapter);
 
+        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i == 0){
+                    Log.d(TAG,"SELECIONEI ->");
+                }
+            }
+        });
         //FireBase
         CollectionReference collRef = FirebaseFirestore.getInstance().collection("restaurantes");
         collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,7 +91,18 @@ public class RestaurantListFragment extends Fragment {
             }
 
         });
+        /*
+        protected void onListItemClick(ListView l, View v, int position, long id) {
+            super.onListItemClick(l, v, position, id);
 
+            Object obj = this.getListAdapter().getItem(position);
+            String value= obj.toString();
+
+            Intent intent= new Intent(CurrrentClass.this,NextClass.class);
+            intent.putExtra("value", value);
+            startActivity(intent);
+        }
+         */
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -86,6 +112,7 @@ public class RestaurantListFragment extends Fragment {
         }
         restaurantListAdapter.insert(r, 0);
     }
+
 
 
 }

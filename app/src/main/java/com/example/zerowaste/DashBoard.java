@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback{
+public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
     private static final String MORADA = "morada";
     private static final String MAGIC_BOX = "magic_box";
     private static final String PRECO = "preco";
@@ -51,17 +51,13 @@ public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerCl
         setContentView(R.layout.activity_dash_board);
 
         SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tray_fragment_final);
         mapFragment.getMapAsync(this);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
-        //id.fragment
-        /*SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fragment);
-        supportMapFragment.getMapAsync(this);*/
-
+        
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -139,26 +135,3 @@ public class DashBoard extends AppCompatActivity implements GoogleMap.OnMarkerCl
         return false;
     }
 }
-
-  /*  @Override
-    public void onMapReady(GoogleMap googleMap) {
-        gMap = googleMap;
-        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                //Marker
-                MarkerOptions markerOptions = new MarkerOptions();
-
-                //Set Marker Position
-                markerOptions.position(latLng);
-                //Set Latitude and Longitude On MArker
-                markerOptions.title(latLng.latitude + " : "+ latLng.longitude);
-                //clear prev pos
-                gMap.clear();
-                //zoom
-                gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                //add Marker
-                gMap.addMarker(markerOptions);
-            }
-        });
-    }*/

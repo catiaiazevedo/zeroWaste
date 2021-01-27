@@ -29,7 +29,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/tray_total_final"
@@ -37,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Total"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tray_price_final_final"
@@ -62,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="Morada"
-                    android:textSize="17sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -91,7 +93,7 @@
                 android:text="Contactar Restaurante"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:backgroundTint="@android:color/holo_blue_dark" />
+                app:backgroundTint="@android:color/holo_green_dark" />
         </LinearLayout>
     </ScrollView>
 
